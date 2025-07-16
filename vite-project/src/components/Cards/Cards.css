@@ -1,0 +1,92 @@
+.Card_Frame {
+  height: 360px;
+  width: 316px;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+  padding: 17px;
+  box-sizing: border-box;
+  margin: 10px;
+}
+.Card_Frame .Logo {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+.Card_Frame .Logo .logo_box {
+  height: 82px;
+  width: 83px;
+  border: 1px solid white;
+  border-radius: 12px;
+  background: linear-gradient(to bottom, #FEFEFD, #F1F1F1);
+  box-shadow: 0px 0px 10.5px 0px rgba(148, 148, 148, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Card_Frame .Logo .logo_box .Inner_cir {
+  height: 63px;
+  width: 63px;
+  background-color: white;
+  border-radius: 50px;
+}
+.Card_Frame .Logo .time_label {
+  height: 33px;
+  width: 75px;
+  background-color: #B0D9FF;
+  border-radius: 10px;
+  font-weight: normal;
+  font-size: 14px;
+  font-family: "Satoshi", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Card_Frame .Title {
+  margin-top: 20px;
+  font-family: "Satoshi", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+}
+.Card_Frame .description {
+  margin-top: 15px;
+  color: #5A5A5A;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.Card_Frame .description span {
+  font-family: "Satoshi", sans-serif;
+  font-weight: 100;
+}
+.Card_Frame .job_des {
+  margin-top: 15px;
+  margin-bottom: 12px;
+  height: 100px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  color: #555555;
+}
+.Card_Frame .job_des ul {
+  list-style-type: disc;
+  margin: 0px;
+  padding-left: 20px;
+}
+.Card_Frame .job_des ul li {
+  font-size: 14px;
+  margin: 0px;
+  padding: 0px;
+}
+.Card_Frame .job_des ul li::marker {
+  color: #555555;
+  margin: none;
+}
+.Card_Frame .btn button {
+  background-color: #00AAFF;
+  color: white;
+  width: 284px;
+  height: 46px;
+  border: none;
+  border-radius: 12px;
+}/*# sourceMappingURL=Cards.css.map */
