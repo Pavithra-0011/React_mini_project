@@ -1,0 +1,21 @@
+body {
+  overflow-y: scroll;
+  scrollbar-width: none;
+  /* background: #fafafa; */
+  font-family: "Satoshi Variable", sans-serif; 
+  margin: 0px;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+

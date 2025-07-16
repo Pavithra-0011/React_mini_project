@@ -1,0 +1,13 @@
+body{
+    background-color: #f5f4f4;
+    font-family: 'Satoshi', sans-serif;
+}
+
+body {
+  overflow-y: scroll;
+  scrollbar-width: none; 
+}
+
+body::-webkit-scrollbar {
+  display: none; 
+}

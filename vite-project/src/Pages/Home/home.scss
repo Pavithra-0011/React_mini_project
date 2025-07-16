@@ -1,0 +1,76 @@
+body {
+  overflow-y: scroll;
+  scrollbar-width: none; 
+}
+
+body::-webkit-scrollbar {
+  display: none; 
+}
+
+.main-frame{
+    .header{
+      height: 210px;
+      background-color: #FFFFFF;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+      .Navigation_links{
+        height: 70px;
+        width: 890px;
+        background-color: #FCFCFC;
+        border-radius: 120px;
+        box-shadow: 0 0 20px 0 #7F7F7F26;
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-around  ;
+        align-items: center;
+        nav{
+            // font-weight: 100;
+            width: 630px;
+            display: flex;
+            justify-content: space-around;
+            // background-color: gray;
+            // align-items: center;
+            ul{
+                padding: 0px 10px;
+                width: 100%;
+                list-style-type: none;
+                display: flex;
+                justify-content: space-between;
+                li {
+                    cursor:pointer;
+                    font-weight:normal;
+                    font-family: 'Satoshi', sans-serif; // if you're using it
+      }
+            }
+        }
+        button{
+            height: 48px;
+            width: 133px;
+            border-radius: 50px;
+            background: linear-gradient(to bottom, #A128FF, #6100AD);
+            color: white;
+            border: none;
+        }
+      }
+      .filter{
+        height: 60px;
+        // background-color: pink;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+    .body_content{
+      max-height: fit-content;
+      padding: 30px 50px;
+      // background-color: red;
+      display: flex;
+      justify-content: start                           ;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+}
