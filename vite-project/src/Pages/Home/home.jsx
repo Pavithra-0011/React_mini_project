@@ -6,6 +6,7 @@ import Cards from '../../components/Cards/Cards.jsx'
 import Amazon from '../../assets/Amazon.png'
 import Swiggy from '../../assets/Swiggy.png'
 import Tesla from '../../assets/Tesla.png'
+import BasicModal from '../../components/Modal/modal.jsx'
 import Slider from '../../components/Slider/slider.jsx'
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
 import RecordVoiceOverOutlinedIcon from '@mui/icons-material/RecordVoiceOverOutlined';
@@ -24,7 +25,7 @@ function Home() {
             <li>About Us</li>
             <li>Testimonals</li>
             </ul></nav>
-            <button>Create Jobs</button>
+            <button><BasicModal text={"Create Jobs"}/></button>
         </div>
         <div className='filter'>
            <Input/>
