@@ -19,3 +19,11 @@ html::-webkit-scrollbar {
   display: none;
 }
 
+/*{
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination":"/index.html"
+        }
+    ]
+}*/
