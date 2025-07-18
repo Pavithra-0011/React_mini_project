@@ -68,3 +68,10 @@ body::-webkit-scrollbar {
   flex-wrap: wrap;
   margin-top: 25px;
 }/*# sourceMappingURL=home.css.map */
+
+.no-jobs-found {
+  text-align: center;
+  margin-top: 40px;
+  color: gray;
+  font-size: 18px;
+}

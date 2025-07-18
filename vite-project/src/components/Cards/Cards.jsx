@@ -6,7 +6,7 @@ import onsite from '../../assets/onsite.png'
 import { Box } from '@mui/material'
 import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined';
 
-function Cards({Logo,Title, company, salary, location, experience}) {
+function Cards({Logo,title, company, salary, location, experience}) {
   return (
     <>
     <div className='Card_Frame'> 
@@ -19,7 +19,7 @@ function Cards({Logo,Title, company, salary, location, experience}) {
           <div className='time_label'>24h Ago</div>
         </div>
         <div className='Title'>
-          {Title}
+          {title}
         </div>
         <div className='description'>
           <span><img src={exp} height='15px' width='18px' />&nbsp;{experience}</span>

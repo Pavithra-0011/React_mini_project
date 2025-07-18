@@ -102,7 +102,14 @@ const type = [{label:'Internship'}, {label:'Full Time'}, {label:'Part Time'},{la
 
 function Home() {
   const [view, SetView] = useState(true)
-  // const [jobs, setJobs] = useState([])
+  const [job, setJob] = useState([])
+  const [hasFilterApplied, setHasFilterApplied] = useState(false);
+  const [filters, setFilters] = useState({
+  role: '',
+  location: '',
+  jobType: '',
+  salaryRange: [0, 100000]
+});
 
   const getCompanyLogo = (companyName) => {
   switch (companyName.toLowerCase()) {
@@ -119,12 +126,41 @@ function Home() {
 useEffect(() => {
     axios.get('http://localhost:8000/jobs')
       .then((res) => {
-        setJobs(res.data)
+        setJob(res.data)
+        console.log("data", res.data)
       })
       .catch((err) => {
         console.error("Error fetching jobs:", err)
       })
   }, [])
+
+  console.log("Filters:", filters);
+  useEffect(() => {
+  if (!hasFilterApplied) return; 
+
+  console.log("🔍 Fetching with filters:", filters); 
+  const fetchJobs = async () => {
+  try {
+    const params = {};
+
+    if (filters.role && filters.role.trim() !== "") params.role = filters.role;
+    if (filters.location && filters.location.trim() !== "") params.location = filters.location;
+    if (filters.jobType && filters.jobType.trim() !== "") params.jobType = filters.jobType;
+
+    params.min_salary = filters.salaryRange[0];
+    params.max_salary = filters.salaryRange[1];
+
+    const query = new URLSearchParams(params).toString();
+    const res = await axios.get(`http://localhost:8000/jobs?${query}`);
+    setJob(res.data);
+  } catch (err) {
+    console.error("Error fetching jobs:", err);
+  }
+};
+
+  fetchJobs();
+}, [filters, hasFilterApplied]);
+
   
   const handleClick =() =>{
     SetView(false)
@@ -133,6 +169,26 @@ useEffect(() => {
   const JobClick = () =>{
      SetView(true)
   }
+
+  const updateFilter = (field, value) => {
+  setHasFilterApplied(true);  // user applied a filter
+  setFilters((prev) => ({
+    ...prev,
+    [field]: value
+  }));
+};
+
+const handleCreateJob = async (newJobData) => {
+  try {
+    const res = await axios.post("http://localhost:8000/jobs", newJobData);
+    setJob((prev) => [...prev, res.data]);
+  } catch (err) {
+    console.error("Error creating job", err);
+  }
+};
+
+const filteredJobs = job;
+// console.log(filters)
   return (
     <div className='main-frame'>
       <div className='header'>
@@ -145,38 +201,49 @@ useEffect(() => {
             <li>About Us</li>
             <li>Testimonals</li>
             </ul></nav>
-            <button><BasicModal text={"Create Jobs"}/></button>
+            <button onClick={handleCreateJob}><BasicModal text={"Create Jobs"}/></button>
         </div>
         <div className='filter'>
            <ComboBox icon={<SearchOutlinedIcon/>} placeholder={'Search By Job, Title, Role'} 
            options={Role} style={style}
+           onChange={(e, value) => updateFilter('role', value?.label || '')}
            />
            <ComboBox icon={<RoomOutlinedIcon/>} placeholder={'Preferred Loaction'} 
            options={Location} style={style}
+           onChange={(e, value) => updateFilter('location', value?.label || '')}
            />
            <ComboBox icon={<RecordVoiceOverOutlinedIcon/>} placeholder={'Job Type'} 
            options={type} style={style}
+           onChange={(e, value) => updateFilter('jobType', value?.label || '')}
            />
-           <Slider/>
+           <Slider
+           onChange={(e, newValue) => updateFilter('salaryRange', newValue)}
+           />
         </div>
       </div>
       <div className='body_content'>
         {view ? (
-        <>
-        {jobs.map((jobs, index) => (
-           <Cards
-            key={index}
-            Logo={getCompanyLogo(jobs.company)}
-            title={jobs.title}
-            company={jobs.company}
-            experience={jobs.experience}
-            jobType={jobs.jobType}
-            location={jobs.location}
-            salary={jobs.salary}/>))}
-        </>
-        )
-        :(<Outlet/>)
-        }
+  <>
+    {filteredJobs.length === 0 ? (
+      <p className='no-jobs-found'>No Jobs found matching your filters</p>
+    ) : (
+      filteredJobs.map((jobs, index) => (
+        <Cards
+          key={index}
+          Logo={getCompanyLogo(jobs.company)}
+          title={jobs.title}
+          company={jobs.company}
+          experience={jobs.experience}
+          jobType={jobs.jobType}
+          location={jobs.location}
+          salary={jobs.salary}
+        />
+      ))
+    )}
+  </>
+) : (
+  <Outlet />
+)}
       </div>
     </div>
   )

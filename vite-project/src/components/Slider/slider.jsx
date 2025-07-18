@@ -6,12 +6,16 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-function RangeSlider() {
+function RangeSlider({onChange}) {
   const [value, setValue] = React.useState([5000, 100000]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    if (onChange) {
+      onChange(event, newValue);
+    }
   };
+
  const formatK = (num) => `${Math.round(num / 1000)}K`;
   return (
     <>
