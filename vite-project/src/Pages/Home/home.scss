@@ -39,11 +39,15 @@ body::-webkit-scrollbar {
                 list-style-type: none;
                 display: flex;
                 justify-content: space-between;
-                li {
+                li ,.lnk{
                     cursor:pointer;
                     font-weight:normal;
                     font-family: 'Satoshi', sans-serif;
-      }
+                    text-decoration: none;
+                      color: black;
+                      font-weight:normal;
+                      font-family: 'Satoshi', sans-serif;
+                    } 
             }
         }
         button{
