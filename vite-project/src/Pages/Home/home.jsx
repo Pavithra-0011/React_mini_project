@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import axios from 'axios'
 import logo from '../../assets/logo.png'
 import { Outlet } from 'react-router-dom'
 import Input from '../../components/material_IP'
@@ -10,12 +12,120 @@ import Tesla from '../../assets/Tesla.png'
 import BasicModal from '../../components/Modal/modal.jsx'
 import Slider from '../../components/Slider/slider.jsx'
 import { Link } from 'react-router-dom';
+import ComboBox from '../../components/AutoComplete/autocomplete.jsx'
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
 import RecordVoiceOverOutlinedIcon from '@mui/icons-material/RecordVoiceOverOutlined';
 import './home.scss'
 
+const jobs = [
+  {
+    title: "Full Stack Developer",
+    company: "Amazon",
+    experience: "1-3 yr",
+    jobType: "onsite",
+    location: "Chennai",
+    salary: 12
+  },
+  {
+    title: "Node Js Developer",
+    company: "Tesla",
+    experience: "1-3 yr",
+    jobType: "onsite",
+    location: "Bangalore",
+    salary: 12
+  },
+  {
+    title: "UX/UI Designer",
+    company: "Swiggy",
+    experience: "1-3 yr",
+    jobType: "onsite",
+    location: "Hyderabad",
+    salary: 12
+  },
+  {
+    title: "Full Stack Developer",
+    company: "Amazon",
+    experience: "1-3 yr",
+    jobType: "onsite",
+    location: "Pune",
+    salary: 12
+  },
+  {
+    title: "Node Js Developer",
+    company: "Tesla",
+    experience: "1-3 yr",
+    jobType: "onsite",
+    location: "Noida",
+    salary: 12
+  },
+  {
+    title: "UX/UI Designer",
+    company: "Swiggy",
+    experience: "1-3 yr",
+    jobType: "onsite",
+    location: "Kolkata",
+    salary: 12
+  },
+  {
+    title: "Full Stack Developer",
+    company: "Amazon",
+    experience: "1-3 yr",
+    jobType: "onsite",
+    location: "Mumbai",
+    salary: 12
+  },
+  {
+    title: "Node Js Developer",
+    company: "Tesla",
+    experience: "1-3 yr",
+    jobType: "onsite",
+    location: "Delhi",
+    salary: 12
+  }
+];
+
+const style = {
+    margin: '0px 0px',
+    width: 300,
+    border: '0px',
+    '& .MuiOutlinedInput-root': {
+          borderRadius: '10px',
+           '& fieldset': {
+            border: 'none'},
+          // border: '0px'
+        },
+}
+
+const Role =[{label:'Full Stack Developer'}, {label:'UI/UX Designer'}, {label:'Node Js Developer'}]
+const Location =[{label:'Chennai'}, {label:'Bangalore'}, {label:'Mumbai'}, {label:'Pune'}, {label:'Hyderabad'}]
+const type = [{label:'Internship'}, {label:'Full Time'}, {label:'Part Time'},{label:'Contract'}, {label: 'Remote'}]
+
 function Home() {
   const [view, SetView] = useState(true)
+  // const [jobs, setJobs] = useState([])
+
+  const getCompanyLogo = (companyName) => {
+  switch (companyName.toLowerCase()) {
+    case 'amazon':
+      return Amazon;
+    case 'tesla':
+      return Tesla;
+    case 'swiggy':
+      return Swiggy;
+    default:
+      return null; // or a default logo
+  }
+};
+useEffect(() => {
+    axios.get('http://localhost:8000/jobs')
+      .then((res) => {
+        setJobs(res.data)
+      })
+      .catch((err) => {
+        console.error("Error fetching jobs:", err)
+      })
+  }, [])
+  
   const handleClick =() =>{
     SetView(false)
   }
@@ -38,16 +148,14 @@ function Home() {
             <button><BasicModal text={"Create Jobs"}/></button>
         </div>
         <div className='filter'>
-           <Input/>
-           <Select_Input placeholder={"Preferred Location"} icon={<RoomOutlinedIcon/>}
-           Menu1={"Chennai"}
-           Menu2= {"Bangalore"}
+           <ComboBox icon={<SearchOutlinedIcon/>} placeholder={'Search By Job, Title, Role'} 
+           options={Role} style={style}
            />
-           <Select_Input placeholder={"Job Type"} icon={<RecordVoiceOverOutlinedIcon/>}
-           Menu1={"Internship"}
-           Menu2= {"Full Time"}
-           Menu3= {"Part Time"}
-           Menu4 = {"Contract"}
+           <ComboBox icon={<RoomOutlinedIcon/>} placeholder={'Preferred Loaction'} 
+           options={Location} style={style}
+           />
+           <ComboBox icon={<RecordVoiceOverOutlinedIcon/>} placeholder={'Job Type'} 
+           options={type} style={style}
            />
            <Slider/>
         </div>
@@ -55,14 +163,16 @@ function Home() {
       <div className='body_content'>
         {view ? (
         <>
-        <Cards Logo={Amazon} Title={"Full Stack Developer"}/>
-        <Cards Logo={Tesla} Title={"Node Js Developer"}/>
-        <Cards Logo={Swiggy} Title={"UI/UX Developer"}/>
-        <Cards Logo={Amazon} Title={"Node Js Developer"}/>
-        <Cards Logo={Tesla} Title={"UI/UX Developer"}/>
-        <Cards Logo={Swiggy} Title={"Full Stack Developer"}/>
-        <Cards Logo={Amazon} Title={"Node Js Developer"}/>
-        <Cards Logo={Tesla} Title={"UI/UX Developer"}/>
+        {jobs.map((jobs, index) => (
+           <Cards
+            key={index}
+            Logo={getCompanyLogo(jobs.company)}
+            title={jobs.title}
+            company={jobs.company}
+            experience={jobs.experience}
+            jobType={jobs.jobType}
+            location={jobs.location}
+            salary={jobs.salary}/>))}
         </>
         )
         :(<Outlet/>)

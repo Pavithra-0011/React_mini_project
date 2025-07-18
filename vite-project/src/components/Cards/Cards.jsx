@@ -6,7 +6,7 @@ import onsite from '../../assets/onsite.png'
 import { Box } from '@mui/material'
 import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined';
 
-function Cards({Logo,Title}) {
+function Cards({Logo,Title, company, salary, location, experience}) {
   return (
     <>
     <div className='Card_Frame'> 
@@ -22,9 +22,9 @@ function Cards({Logo,Title}) {
           {Title}
         </div>
         <div className='description'>
-          <span><img src={exp} height='15px' width='18px' />&nbsp;1-3 yr Exp</span>
-          <span><img src={onsite} height='15px' width='18px' />&nbsp;onsite</span>
-          <span><img src={Salary} height='15px' width='18px' />&nbsp;12LPA</span>
+          <span><img src={exp} height='15px' width='18px' />&nbsp;{experience}</span>
+          <span><img src={onsite} height='15px' width='18px' />&nbsp;{location}</span>
+          <span><img src={Salary} height='15px' width='18px' />&nbsp;{salary}</span>
         </div>
         <div className='job_des'>
             <ul>

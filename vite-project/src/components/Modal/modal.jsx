@@ -30,6 +30,14 @@ const style = {
   alignItems:'center',
 };
 
+const style2 = {
+    margin: '7px 0px',
+    width: 380,
+    '& .MuiOutlinedInput-root': {
+          borderRadius: '10px', 
+        },
+}
+
 const cities = [{label :'Chennai'}, {label :'Mumbai'}, {label :'Bangalore'}, {label :'Pune'}, {label :'Hyderabad'}]
 const Job_Type = [{label:'Internship'}, {label:'Part-Time'}, {label:'Full-Time'}, {label:'Contract'}]
 
@@ -54,8 +62,8 @@ export default function BasicModal({text}) {
           <div style={{height:'90%', width:'98%',boxSizing:'border-box', marginTop:'20px', padding:'10px 10px', display:'flex', flexWrap:'wrap', justifyContent:'space-between'}}>
             <Job_Input placeholder={"Job Title"} text={"Job Title"}/>
             <Job_Input placeholder={"Amazon, Microsoft, Swiggy"} text={"Company Name"}/>
-            <ComboBox options={cities} text={"Location"} placeholder={"Job Location"}/>
-            <ComboBox options={Job_Type} text={"Job Type"} placeholder={"Job Type"}/>
+            <ComboBox options={cities} text={"Location"} placeholder={"Job Location"} style={style2}/>
+            <ComboBox options={Job_Type} text={"Job Type"} placeholder={"Job Type"} style={style2}/>
             <TextFieldComponent placeholder={0} text={"Salary Range"}/>
             <TextFieldComponent placeholder={'12,00,000'}/>
             <BasicDatePicker/>
